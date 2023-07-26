@@ -9,16 +9,16 @@ export const ResultsTable = props => {
     >
       <tbody>
         <tr>
-          <th style={{ border: "1 px solid white" }}>Hole</th>
+          <td style={{ border: "1 px solid white", width: "60px" }}>Hole</td>
           {Array.from(Array(9).keys())
             .map(x => x + 1)
             .map(x => (
-              <td
+              <th
                 key={`hole_td_${x}`}
-                style={{ border: "1px solid white", width: "20px" }}
+                style={{ border: "1px solid white", width: "35px" }}
               >
                 {x}
-              </td>
+              </th>
             ))}
           <td style={{ border: "1px solid white", width: "45px" }}>Total</td>
         </tr>
@@ -26,6 +26,7 @@ export const ResultsTable = props => {
           <tr key={`name_tr${index}`}>
             <th
               style={{
+                width: "60px",
                 border: "1px solid white",
               }}
             >{`${player.name}`}</th>
@@ -34,6 +35,7 @@ export const ResultsTable = props => {
                 key={`hole_td_score${player.name}_${scoreidx}`}
                 style={{
                   border: "1px solid white",
+                  width: "35px",
                 }}
               >
                 {x}
