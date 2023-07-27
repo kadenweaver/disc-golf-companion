@@ -1,5 +1,5 @@
 import { ResultsTable } from "./ResultsTable";
-import { DataStore } from "@aws-amplify/datastore";
+import { DataStore } from "aws-amplify";
 import { UserGameScore } from "./models";
 
 export function ResultsPage(props) {

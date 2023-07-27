@@ -1,0 +1,6 @@
+type UserGameScore @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  user: String
+  frontNine: Boolean
+  userScores: [Int]
+}
