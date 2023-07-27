@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Amplify } from "aws-amplify";
-import awsmobile from "./aws-exports";
+import awsmobile from "./exports";
 import App from "./App.jsx";
 import "./index.css";
 
