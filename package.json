@@ -12,6 +12,8 @@
   "dependencies": {
     "@aws-amplify/cli": "^12.2.2",
     "aws-amplify": "^5.3.5",
+    "aws-appsync": "^4.1.9",
+    "aws-appsync-react": "^4.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

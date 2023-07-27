@@ -6,6 +6,7 @@ export function ResultsPage(props) {
   const { playerList } = props;
 
   const saveUserScores = async () => {
+    console.log("saving");
     const userGameScores = playerList.map(x =>
       DataStore.save(
         new UserGameScore({
