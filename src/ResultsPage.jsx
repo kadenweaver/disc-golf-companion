@@ -1,17 +1,18 @@
+import { useState } from "react";
 import { ResultsTable } from "./ResultsTable";
 import { DataStore } from "aws-amplify";
 import { UserGameScore } from "./models";
 
 export function ResultsPage(props) {
-  const { playerList } = props;
+  const { playerList, refreshGame, frontNine } = props;
+  const [scoresSubmitted, setScoresSubmitted] = useState(false);
 
   const saveUserScores = async () => {
-    console.log("saving");
     const userGameScores = playerList.map(x =>
       DataStore.save(
         new UserGameScore({
           user: x.name,
-          frontNine: true,
+          frontNine: frontNine,
           userScores: x.scores,
         })
       )
@@ -23,14 +24,25 @@ export function ResultsPage(props) {
         console.log(result.reason);
       }
     }
+
+    setScoresSubmitted(true);
   };
 
   return (
     <div>
       <h1>Results</h1>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <ResultsTable playerList={playerList} />
-        <button onClick={() => saveUserScores()}>Save Results</button>
+        <button
+          style={{
+            backgroundColor: scoresSubmitted ? undefined : "green",
+            width: "50%",
+            alignSelf: "center",
+          }}
+          onClick={() => (scoresSubmitted ? refreshGame() : saveUserScores())}
+        >
+          {scoresSubmitted ? "Play Again" : "Save Results"}
+        </button>
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ export function StateMachine() {
   const [playerList, setPlayerList] = useState([
     { name: undefined, scores: defaultScoreArr },
   ]);
+  const [frontNine, setFrontNine] = useState(true);
   const [holeIndex, setHoleIndex] = useState(undefined);
-  const [greeting, setGreeting] = useState(""); // Add this
 
   const advanceToNextHole = () => setHoleIndex(idx => idx + 1);
 
@@ -32,14 +32,21 @@ export function StateMachine() {
     setHoleIndex(0);
   };
 
+  const refreshGame = () => {
+    setPlayerList([{ name: undefined, scores: defaultScoreArr }]);
+    setHoleIndex(undefined);
+    setFrontNine(true);
+  };
+
   return (
     <div>
       {isNaN(holeIndex) && (
         <SetupPage
           playerList={playerList}
+          frontNine={frontNine}
           setPlayerList={setPlayerList}
           startGame={startGame}
-          greeting={greeting}
+          setFrontNine={setFrontNine}
         />
       )}
       {holeIndex >= 0 && holeIndex < 9 && (
@@ -50,7 +57,13 @@ export function StateMachine() {
           advanceToNextHole={advanceToNextHole}
         />
       )}
-      {holeIndex > 8 && <ResultsPage playerList={playerList} />}
+      {holeIndex > 8 && (
+        <ResultsPage
+          playerList={playerList}
+          frontNine={frontNine}
+          refreshGame={refreshGame}
+        />
+      )}
     </div>
   );
 }
