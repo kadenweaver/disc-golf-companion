@@ -36,7 +36,8 @@ export function ResultsPage(props) {
         <button
           style={{
             backgroundColor: scoresSubmitted ? undefined : "green",
-            width: "50%",
+            color: scoresSubmitted ? undefined : "white",
+            width: "60%",
             alignSelf: "center",
           }}
           onClick={() => (scoresSubmitted ? refreshGame() : saveUserScores())}
