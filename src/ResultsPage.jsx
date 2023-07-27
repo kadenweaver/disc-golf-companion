@@ -29,7 +29,7 @@ export function ResultsPage(props) {
       <h1>Results</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <ResultsTable playerList={playerList} />
-        <button onClick={saveUserScores}>Save Results</button>
+        <button onClick={() => saveUserScores()}>Save Results</button>
       </div>
     </div>
   );
