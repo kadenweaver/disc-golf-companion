@@ -25,7 +25,7 @@ export function SingleScoreForm(props) {
 
   return (
     <div style={{ width: "360px" }}>
-      <h1>{`Hole Number ${holeNumber}`}</h1>
+      <h1>{`Hole ${holeNumber}`}</h1>
       <div
         style={{
           display: "flex",
