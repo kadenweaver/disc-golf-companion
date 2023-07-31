@@ -1,6 +1,12 @@
 export function SetupPage(props) {
-  const { playerList, frontNine, setPlayerList, startGame, setFrontNine } =
-    props;
+  const {
+    playerList,
+    frontNine,
+    setPlayerList,
+    startGame,
+    setFrontNine,
+    setScoresPage,
+  } = props;
 
   const addPlayer = () => {
     const playerListCopy = playerList.slice();
@@ -22,6 +28,12 @@ export function SetupPage(props) {
 
   return (
     <div>
+      <button
+        onClick={() => setScoresPage(true)}
+        style={{ position: "absolute", right: "1em", top: "1em" }}
+      >
+        Scores
+      </button>
       <h1>Setup</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
         {playerList.map((player, index) => (

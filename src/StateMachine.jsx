@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SetupPage } from "./SetupPage";
 import { SingleScoreForm } from "./SingleScoreForm";
 import { ResultsPage } from "./ResultsPage";
+import { Scoreboard } from "./Scoreboard";
 import "./App.css";
 
 const defaultScoreArr = Array(9).fill(2);
@@ -12,6 +13,7 @@ export function StateMachine() {
   ]);
   const [frontNine, setFrontNine] = useState(true);
   const [holeIndex, setHoleIndex] = useState(undefined);
+  const [scoresPageOpen, toggleScoresPageOpen] = useState(false);
 
   const advanceToNextHole = () => setHoleIndex(idx => idx + 1);
 
@@ -40,15 +42,19 @@ export function StateMachine() {
 
   return (
     <div>
-      {isNaN(holeIndex) && (
-        <SetupPage
-          playerList={playerList}
-          frontNine={frontNine}
-          setPlayerList={setPlayerList}
-          startGame={startGame}
-          setFrontNine={setFrontNine}
-        />
-      )}
+      {isNaN(holeIndex) &&
+        (scoresPageOpen ? (
+          <Scoreboard toggleScoresPageOpen={toggleScoresPageOpen} />
+        ) : (
+          <SetupPage
+            playerList={playerList}
+            frontNine={frontNine}
+            setPlayerList={setPlayerList}
+            startGame={startGame}
+            setFrontNine={setFrontNine}
+            setScoresPage={toggleScoresPageOpen}
+          />
+        ))}
       {holeIndex >= 0 && holeIndex < 9 && (
         <SingleScoreForm
           holeIndex={holeIndex}
