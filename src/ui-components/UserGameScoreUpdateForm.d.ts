@@ -17,11 +17,15 @@ export declare type UserGameScoreUpdateFormInputValues = {
     user?: string;
     frontNine?: boolean;
     userScores?: number[];
+    createdAt?: string;
+    updatedAt?: string;
 };
 export declare type UserGameScoreUpdateFormValidationValues = {
     user?: ValidationFunction<string>;
     frontNine?: ValidationFunction<boolean>;
     userScores?: ValidationFunction<number>;
+    createdAt?: ValidationFunction<string>;
+    updatedAt?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UserGameScoreUpdateFormOverridesProps = {
@@ -29,6 +33,8 @@ export declare type UserGameScoreUpdateFormOverridesProps = {
     user?: PrimitiveOverrideProps<TextFieldProps>;
     frontNine?: PrimitiveOverrideProps<SwitchFieldProps>;
     userScores?: PrimitiveOverrideProps<TextFieldProps>;
+    createdAt?: PrimitiveOverrideProps<TextFieldProps>;
+    updatedAt?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type UserGameScoreUpdateFormProps = React.PropsWithChildren<{
     overrides?: UserGameScoreUpdateFormOverridesProps | undefined | null;

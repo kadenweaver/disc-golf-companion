@@ -196,16 +196,22 @@ export default function UserGameScoreCreateForm(props) {
     user: "",
     frontNine: false,
     userScores: [],
+    createdAt: "",
+    updatedAt: "",
   };
   const [user, setUser] = React.useState(initialValues.user);
   const [frontNine, setFrontNine] = React.useState(initialValues.frontNine);
   const [userScores, setUserScores] = React.useState(initialValues.userScores);
+  const [createdAt, setCreatedAt] = React.useState(initialValues.createdAt);
+  const [updatedAt, setUpdatedAt] = React.useState(initialValues.updatedAt);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setUser(initialValues.user);
     setFrontNine(initialValues.frontNine);
     setUserScores(initialValues.userScores);
     setCurrentUserScoresValue("");
+    setCreatedAt(initialValues.createdAt);
+    setUpdatedAt(initialValues.updatedAt);
     setErrors({});
   };
   const [currentUserScoresValue, setCurrentUserScoresValue] =
@@ -215,6 +221,8 @@ export default function UserGameScoreCreateForm(props) {
     user: [],
     frontNine: [],
     userScores: [],
+    createdAt: [],
+    updatedAt: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -233,6 +241,23 @@ export default function UserGameScoreCreateForm(props) {
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
   };
+  const convertToLocal = (date) => {
+    const df = new Intl.DateTimeFormat("default", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      calendar: "iso8601",
+      numberingSystem: "latn",
+      hourCycle: "h23",
+    });
+    const parts = df.formatToParts(date).reduce((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+  };
   return (
     <Grid
       as="form"
@@ -245,6 +270,8 @@ export default function UserGameScoreCreateForm(props) {
           user,
           frontNine,
           userScores,
+          createdAt,
+          updatedAt,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -302,6 +329,8 @@ export default function UserGameScoreCreateForm(props) {
               user: value,
               frontNine,
               userScores,
+              createdAt,
+              updatedAt,
             };
             const result = onChange(modelFields);
             value = result?.user ?? value;
@@ -328,6 +357,8 @@ export default function UserGameScoreCreateForm(props) {
               user,
               frontNine: value,
               userScores,
+              createdAt,
+              updatedAt,
             };
             const result = onChange(modelFields);
             value = result?.frontNine ?? value;
@@ -350,6 +381,8 @@ export default function UserGameScoreCreateForm(props) {
               user,
               frontNine,
               userScores: values,
+              createdAt,
+              updatedAt,
             };
             const result = onChange(modelFields);
             values = result?.userScores ?? values;
@@ -392,6 +425,66 @@ export default function UserGameScoreCreateForm(props) {
           {...getOverrideProps(overrides, "userScores")}
         ></TextField>
       </ArrayField>
+      <TextField
+        label="Created at"
+        isRequired={false}
+        isReadOnly={false}
+        type="datetime-local"
+        value={createdAt && convertToLocal(new Date(createdAt))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              user,
+              frontNine,
+              userScores,
+              createdAt: value,
+              updatedAt,
+            };
+            const result = onChange(modelFields);
+            value = result?.createdAt ?? value;
+          }
+          if (errors.createdAt?.hasError) {
+            runValidationTasks("createdAt", value);
+          }
+          setCreatedAt(value);
+        }}
+        onBlur={() => runValidationTasks("createdAt", createdAt)}
+        errorMessage={errors.createdAt?.errorMessage}
+        hasError={errors.createdAt?.hasError}
+        {...getOverrideProps(overrides, "createdAt")}
+      ></TextField>
+      <TextField
+        label="Updated at"
+        isRequired={false}
+        isReadOnly={false}
+        type="datetime-local"
+        value={updatedAt && convertToLocal(new Date(updatedAt))}
+        onChange={(e) => {
+          let value =
+            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          if (onChange) {
+            const modelFields = {
+              user,
+              frontNine,
+              userScores,
+              createdAt,
+              updatedAt: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.updatedAt ?? value;
+          }
+          if (errors.updatedAt?.hasError) {
+            runValidationTasks("updatedAt", value);
+          }
+          setUpdatedAt(value);
+        }}
+        onBlur={() => runValidationTasks("updatedAt", updatedAt)}
+        errorMessage={errors.updatedAt?.errorMessage}
+        hasError={errors.updatedAt?.hasError}
+        {...getOverrideProps(overrides, "updatedAt")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

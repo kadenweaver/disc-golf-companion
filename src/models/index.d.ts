@@ -9,7 +9,6 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 type EagerUserGameScore = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<UserGameScore, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly user?: string | null;
@@ -22,7 +21,6 @@ type EagerUserGameScore = {
 type LazyUserGameScore = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<UserGameScore, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
   readonly user?: string | null;

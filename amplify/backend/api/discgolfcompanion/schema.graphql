@@ -3,4 +3,7 @@ type UserGameScore @model @auth(rules: [{allow: public}]) {
   user: String
   frontNine: Boolean
   userScores: [Int]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
+ 
