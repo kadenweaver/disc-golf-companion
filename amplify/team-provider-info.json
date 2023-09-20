@@ -10,6 +10,11 @@
       "StackName": "amplify-amplify3e4745cd83774-staging-181602",
       "StackId": "arn:aws:cloudformation:us-west-2:020625295553:stack/amplify-amplify3e4745cd83774-staging-181602/a597d3b0-2ca9-11ee-87d4-0213196e9b77",
       "AmplifyAppId": "d1jd1887ry1z7m"
+    },
+    "categories": {
+      "api": {
+        "discgolfcompanion": {}
+      }
     }
   }
 }
